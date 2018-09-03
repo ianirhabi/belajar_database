@@ -1,0 +1,23 @@
+buka mysql docker 
+
+docker exec -it mysqlian mysql -u root -p
+setelah masuk mysql kemudian ketik  ketik
+
+mysql> grant all privileges on *.* to 'root'@'%' identified by 'ian123456'; 
+mysql> flush privileges;
+
+
+kemudian restart mysql docker
+coba konek dari workbranch mysql
+
+
+untuk melihat ip dari mysql 
+docker inspect iddocker/atau/namanya
+
+
+situsnya https://docs.docker.com/samples/library/mysql/#mysql_allow_empty_password
+
+
+
+membuat password root mysql mysql>5.6 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('MyNewPass');
+https://dev.mysql.com/doc/refman/5.6/en/resetting-permissions.html

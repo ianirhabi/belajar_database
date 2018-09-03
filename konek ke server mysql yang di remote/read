@@ -1,0 +1,5 @@
+//konek mysql yang di setting untuk remote 
+//https://www.cyberciti.biz/faq/how-to-connect-to-my-mysql-database-server-using-command-line-and-php/
+//berikut kodenya
+
+$sudo mysql -u user_name -h mysql_server_ip_address_here -p

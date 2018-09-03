@@ -1,0 +1,68 @@
+//insert
+insert into child(parent_id) values(1);
+
+//update
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+
+//delete
+delete from table_name ;
+ 
+
+//sintax khusus
+SELECT * FROM latihan_database.penerbit order by id DESC;    // untuk mengurutkan data dari yang terbesar sampai yang terkecil
+SELECT * FROM latihan_database.penerbit order by id ASC;	// mengerutkan data dari yang terkecil sampai yang terbesar	
+
+SELECT * FROM latihan_database.penerbit order by id DESC limit 1; 	// mengerutkan data dari yang terbesar sampai yang terkecil dengan limit data 1
+SELECT * FROM latihan_database.penerbit order by id ASC limit 2; 	// mengerutkan data dari yang terkecil sampai yang terbesar dengan limit data 2
+
+// menampilkan data dengan distinct 
+//berfungsi untuk menampilkan satu kolom saja. contohya untuk menampilkan kolom id
+select * from nama_table;
+select distinct (nama_colum) from nama_table
+
+//menampilkan data dengan count 
+select count(*) as 'total' from penerbit;  //fungsi ini untuk menampilkan total keseluruhan data dalam satu tabel
+
+//menampilkan data dengan pencarian
+select * from penerbit where nama_penerbit LIKE '%h%';   // fungsi ini untuk melakukan pencarian data yang ada huruf h nya di colom nama_penerbit
+
+//menampilkan data dengan alias
+select id as 'id_ku', nama_penerbit as 'nama_orang' from penerbit; 
+
+//menampilkan nilai rata-rata dari suatu data
+select AVG(harga_jual) as 'rata-rata harga' from penerbit;
+
+//menampilkan harga terbesar dari suatu data
+select max(harga_jual) as 'harga terbesar' from penerbit;
+
+//menampilkan harga terkecil dari suatu data
+select min(harga_jual) as 'harga terkecil' from penerbit;
+
+//menampilkan total jumlah dari suatu data
+select sum(harga_jual) as 'total jumlah' from penerbit;
+
+//menampilkan data dengan group by
+select (nama_penerbit) from penerbit group by id;
+
+
+/**
+*menampilkan data dengan join antar table (yang ada foreign key nya) contoh database ada di folder table foreign key
+**/
+
+//cross join
+SELECT link_penerbit.id_penerbit, penerbit.nama_penerbit, penerbit_lalu.berlangsung_penerbit 
+from link_penerbit, penerbit, penerbit_lalu;   // query ini akan menampilkan seluruh data yang di join
+
+//inner join
+SELECT * FROM latihan_database.penerbit inner join link_penerbit 
+on penerbit.id = link_penerbit.id_penerbit;
+
+atau dengan 
+
+SELECT c.id, nama_penerbit, keterangan from penerbit c
+join link_penerbit s on c.id = s.id_penerbit_lalu;
+
+
+inner join juga bisa di pelajari disini http://topters.us/tutorial/programming/bagaimana-cara-menampilkan-data-dua-tabel-mysql-dengan-php/

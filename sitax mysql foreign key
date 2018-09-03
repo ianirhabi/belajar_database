@@ -1,0 +1,32 @@
+//jika ingin menambah foreignkey di mysql terminal 
+alter table siswa add foreign key (kelas) references kelas (id_kelas);
+
+//kalau di  mysql workbranch
+ALTER TABLE `latihan_database`.`link_penerbit`
+ADD CONSTRAINT `link_penerbit_ibfk_2` 
+FOREIGN KEY (`id_penerbit_lalu`) 
+REFERENCES `penerbit_lalu` (`id`)
+
+//contoh pembuatan table foreign key :
+//contoh pennggunaan menggunakan aplikasi mtsql work branch
+1).buat terlebih dahulu table penerbit
+
+DROP TABLE IF EXISTS `penerbit`;
+CREATE TABLE `penerbit` (
+  `id` int(11) NOT NULL  AUTO_INCREMENT,
+  `nama_penerbit` varchar(45) DEFAULT NULL,
+  `created` varchar(45) DEFAULT NULL,
+  `update` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+2).kedua buat table foreign keynya
+DROP TABLE IF EXISTS `latihan_database`.`link_penerbit`;
+CREATE TABLE `latihan_database`.`link_penerbit` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id_penerbit` int(10) DEFAULT NULL,
+  `created` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_penerbit` (`id_penerbit`),
+  CONSTRAINT `link_penerbit_ibfk_1` FOREIGN KEY (`id_penerbit`) REFERENCES `penerbit` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;

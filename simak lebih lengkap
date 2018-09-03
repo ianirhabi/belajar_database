@@ -1,0 +1,81 @@
+Home / MySQL / Membuat Foreign Key Di MySQL
+Membuat Foreign Key Di MySQL
+ NUR SALIM   20.38   MYSQL
+Pada tutorial kali ini, kita akan belajar tentang Cara Membuat Foreign Key Di MySQL.
+
+Apa Itu Foreign Key?
+Foreign key adalah salah satu jenis constraint yang digunakan untuk merelasikan antar dua tabel atau lebih. Foreign key digunakan pada tabel kedua (detail) yang mereferensi ke tabel utama (master) yang mempunyai constraint primary key.
+
+Kalau Anda pernah belajar RDBMS, sebuah tabel bisa berelasi dengan tabel yang lainnya, baik itu One To One, One To Many, Many To One, dan Many To Many.
+
+Agar lebih jelas, Anda dapat melihat contoh gambar relasi antara dua tabel di bawah ini:
+
+
+http://blog.vanderli.com.br/
+Pada gambar diatas, kolom Cust_ID pada tabel Orders berperan sebagai foreign key yang mereferensi ke tabel Customers pada kolom ID.
+
+
+Sintak Dasar Foreign Key
+Di bawah ini adalah sintak dasar untuk mendefinisikan foreign key pada sebuah tabel di MySQL:
+
+CONSTRAINT constraint_name
+FOREIGN KEY foreign_key_name (columns)
+REFERENCES parent_table(columns)
+
+Penjelasan sintak:
+CONSTRAINT adalah perintah untuk membuat sebuah constraint.
+constraint_name adalah nama yang akan Anda berikan untuk membuat foreign key
+FOREIGN KEY adalah perintah untuk mendefinisikan foreign key
+foreign_key_name (columns) adalah nama yang digunakan untuk constraint foreign key dan kolom yang akan dijadikan foreign key.
+REFERENCES parent_table(columns) adalah perintah untuk mereferensikan ke tabel utama (primary key)
+
+Membuat Foreign Key
+Untuk membuat sebuah constraint foreign key, Ada 2 cara yang Anda bisa gunakan yaitu:
+
+Membuat Contraint Foreign Key Menggunakan Create Table 
+
+Anda dapat membuat constraint foreign key sewaktu Anda membuat sebuah tabel. Untuk lebih jelasnya, perhatikan contoh di bawah ini: 
+
+CREATE TABLE categories(
+   category_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   category_name VARCHAR(50) NOT NULL,
+   category_description VARCHAR(50)
+) ENGINE=InnoDB;
+ 
+CREATE TABLE products(
+   product_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   product_name VARCHAR(50) NOT NULL,
+   price DECIMAL,
+   category_id INT NOT NULL,
+   FOREIGN KEY fk_category(category_id)
+   REFERENCES categories(category_id)
+)ENGINE=InnoDB;
+
+Membuat Constraint Foreign Key Menggunakan Alter Table 
+
+Anda juga dapat menambahkan constraint foreign key pada sebuah tabel yang sudah ada. Perhatikan contoh di bawah ini: 
+
+CREATE TABLE vendors(
+    vendor_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    vendor_name varchar(50)
+)ENGINE=InnoDB;
+ 
+ALTER TABLE products 
+ADD COLUMN vendor_id INT NOT NULL;
+
+Untuk menambahkan foreign key pada tabel products, Anda dapat menjalakan perintah ALTER TABLE di bawah ini: 
+
+ALTER TABLE products
+ADD FOREIGN KEY fk_vendor(vendor_id)
+REFERENCES vendors(vendor_id);
+
+Menghapus Foreign Key
+Untuk menghapus constraint foreign key pada sebuah tabel, Anda dapat mengggunakan sintak di bawah ini:
+
+ALTER TABLE table_name 
+DROP FOREIGN KEY constraint_name;
+
+Sebagai contoh, asumsikan Anda ingin menghasus constraint foregin key pada tabel products, Anda dapat menjalankan perintah di bawah ini:
+
+ALTER TABLE products
+DROP FOREIGN KEY fk_vendor;
